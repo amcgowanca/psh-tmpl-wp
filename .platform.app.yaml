@@ -73,7 +73,14 @@ mounts:
 
 source:
   operations:
+    upstream-update:
+        command: |
+            git remote add upstream git@github.com:amcgowanca/psh-tmpl-wp.git
+            git fetch --all
+            git merge upstream/master
+            git add .
+            git commit -m "Upstream updated."
     auto-update:
-      command: |
-        curl -fsS https://raw.githubusercontent.com/platformsh/source-operations/main/setup.sh | { bash /dev/fd/3 sop-autoupdate; } 3<&0
+        command: |
+            curl -fsS https://raw.githubusercontent.com/platformsh/source-operations/main/setup.sh | { bash /dev/fd/3 sop-autoupdate; } 3<&0
 
